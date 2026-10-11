@@ -2,7 +2,7 @@
 _commit: e730ed7
 _src_path: gh:audivir/copier-template
 description: Static build of git with zlib, Mbed TLS, and curl linked in
-github_org: audivir
+github_org: zshsetup
 project_name: git-static
 project_slug: git_static
 project_type: shell

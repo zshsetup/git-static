@@ -22,7 +22,7 @@ shell, cvsserver) are left out.
 Clone the repo with submodules (shallow, the history of the vendored projects is not needed):
 
 ```shell
-git clone --recurse-submodules --shallow-submodules https://github.com/audivir/git-static
+git clone --recurse-submodules --shallow-submodules https://github.com/zshsetup/git-static
 cd git-static
 ```
 
