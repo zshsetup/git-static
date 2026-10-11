@@ -160,7 +160,7 @@ echo ">>> zlib"
 )
 
 if [ "$TLS" = openssl ]; then
-  # no-asm: zig's assembler rejects perlasm; no-module: zig cannot link -bundle on macOS
+  # no-asm: the assembler of zig rejects perlasm; no-module: zig cannot link -bundle on macOS
   echo ">>> openssl"
   (
     cd openssl

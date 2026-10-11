@@ -13,8 +13,8 @@ shell, cvsserver) are left out.
 
 ## Prerequisites
 
-- `zig`, GNU make (macOS's `make` 3.81 is enough), `perl`, `git`
-- `autoconf`, `automake`, `libtool` (curl's git tree ships no `configure` script)
+- `zig`, GNU make (`make` 3.81 of macOS is enough), `perl`, `git`
+- `autoconf`, `automake`, `libtool` (the git tree of curl ships no `configure` script)
 - On macOS: Xcode Command Line Tools (SDK)
 
 ## Installation
@@ -40,23 +40,23 @@ them. Output is installed under `dist/`:
 - `dist/share/man`: the man pages, which git publishes prebuilt for each release on kernel.org
 - `dist/share/bash-completion/completions/git`: the bash completion (zsh and fish ship their own),
   and `dist/share/git-core/contrib/completion/git-prompt.sh` for the branch in the prompt
-- `dist/lib/libgit.a`: git's static library
+- `dist/lib/libgit.a`: static library of git
 
 Pass `--static` for the fully static musl build on Linux (output in `dist-static/`), `--clean` to
 remove previous build output first, `--jobs N` to control parallelism, and `--rust` to also build
-git's optional Rust parts.
+optional Rust parts of git.
 
 Pass `--tls openssl` to use OpenSSL instead of Mbed TLS (output in `dist-openssl/`). Released
-binaries use Mbed TLS because it is available under GPL-2.0-or-later, while OpenSSL's Apache-2.0
-license is considered incompatible with git's GPL-2.0-only; building the OpenSSL variant for your
+binaries use Mbed TLS because it is available under GPL-2.0-or-later, while the Apache-2.0
+license of OpenSSL is considered incompatible with GPL-2.0-only of git; building the OpenSSL variant for your
 own use is fine.
 
 HTTPS reads the CA certificates in `/etc/ssl/certs` on Linux and `/etc/ssl/cert.pem` on macOS.
 Systems without them can use the Mozilla bundle from [curl.se](https://curl.se/docs/caextract.html)
 in `share/git-core/certs`, e.g. `export GIT_SSL_CAPATH=~/.local/share/git-core/certs`; only set it
-there, as it replaces the system's certificates.
+there, as it replaces the certificates of the system.
 
-With `--tls openssl`, OpenSSL's default locations are used instead, which miss RHEL/CentOS 7 and 8;
+With `--tls openssl`, the default locations of OpenSSL are used instead, which miss RHEL/CentOS 7 and 8;
 point git at their bundle with `git config --global http.sslCAInfo /etc/pki/tls/cert.pem` there, or
 at the Mozilla bundle with `GIT_SSL_CAINFO=<prefix>/share/git-core/certs/cacert.pem`.
 
@@ -90,5 +90,5 @@ submodules under `vendor/`. Credit goes to their respective authors:
 
 ## License
 
-MIT for this repository's own code. See NOTICE for the licenses of the upstream projects and the
+MIT for the code of this repository. See NOTICE for the licenses of the upstream projects and the
 resulting binaries, which are GPL-2.0 (git).
