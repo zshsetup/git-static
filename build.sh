@@ -275,6 +275,14 @@ mkdir -p "$DIST/share/git-core/certs"
   cd "$DIST/share/git-core/certs"
   curl -fsSLO https://curl.se/ca/cacert.pem
   curl -fsSL https://curl.se/ca/cacert.pem.sha256 | shasum -a 256 -c - >/dev/null
+  # eMudhra intermediates were compromised in October 2026; curl and Mbed TLS do not read OneCRL, so
+  # drop their root until the bundle does; remove this when it is distrusted upstream
+  awk '
+    /^emSign Root CA - G1$/ { skip = 1 }
+    !skip { print }
+    skip && /^-----END CERTIFICATE-----$/ { skip = 0 }
+  ' cacert.pem >cacert.pem.new && mv cacert.pem.new cacert.pem
+  ! grep -q '^emSign Root CA - G1$' cacert.pem
 )
 
 GIT_BIN="$DIST/bin/git"

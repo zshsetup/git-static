@@ -78,6 +78,11 @@ if [ "$(uname -s)" = Linux ] && ! LC_ALL=C grep -a -q 'ld-musl' "$GIT"; then
   fi
 fi
 
+if grep -q '^emSign Root CA - G1$' "$DIST/share/git-core/certs/cacert.pem"; then
+  fail "the bundled certificates still have the eMudhra root"
+fi
+pass "no eMudhra root in the bundled certificates"
+
 if [ "$OFFLINE" = 0 ]; then
   # RHEL/CentOS 7-8
   if [ ! -e /etc/ssl/cert.pem ] && [ -e /etc/pki/tls/cert.pem ]; then

@@ -14,7 +14,10 @@ jobs:
       - name: Check that the release tag matches vendor/git
         run: |
           git_version="$(sed -n 's/^DEF_VER=//p' vendor/git/GIT-VERSION-GEN)"
-          if [ "$git_version" != "$GITHUB_REF_NAME" ]; then
+          # temporary: a rebuild is tagged with a build number, e.g. v2.56.0.1 for v2.56.0
+          tag="$GITHUB_REF_NAME"
+          if [ "$tag" != "$git_version" ] && [ "${tag%.[0-9]*}" = "$git_version" ]; then tag="$git_version"; fi
+          if [ "$git_version" != "$tag" ]; then
             echo "::error::Release tag $GITHUB_REF_NAME does not match vendor/git ($git_version)"
             exit 1
           fi
